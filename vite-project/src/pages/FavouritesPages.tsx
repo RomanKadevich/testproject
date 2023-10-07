@@ -7,7 +7,7 @@ export const FavouritesPages = () => {
     <div className="flex justify-center flex-wrap pt-10 mx-auto h-screen w-screen">
       <ul className="none">
         {favourites.map((f) => (
-          <li key={f}>
+          <li key={JSON.stringify(Date.now()*Math.random())}>
             <a href={f} target="_blank">{f}</a>
           </li>
         ))}
