@@ -1,6 +1,7 @@
-import { useDebounce } from "../debounce/debounce.ts";
+import { useDebounce } from "../hooks/debounce.ts";
 import { useLazyGetUserReposQuery, useSearchUsersQuery } from "../store/github/github.api.ts";
 import { useState, useEffect } from "react";
+import { Repo } from "../components/Repo.tsx";
 export const HomePage = () => {
   const [search, setSearch] = useState("");
   const [dropdown, setDropdown]= useState(false);
@@ -17,6 +18,7 @@ export const HomePage = () => {
   }, [debounced, data]);
  const clickHandler = (username: string)=>{
    fetchRepos(username)
+   setDropdown(false)
  }
   return (
     <>
@@ -48,6 +50,7 @@ export const HomePage = () => {
           </ul>}
           <div className="container">
             {areReposLoading&&<p>Repos loading...</p>}
+            {repos?.map(repo=><Repo key = {repo.id} repo={repo}/>)}
           </div>
         </div>
         {/* {data?.map((item) => (
